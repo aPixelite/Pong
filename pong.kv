@@ -1,0 +1,70 @@
+#:kivy 1.0.9
+
+<PongBall>:
+    size: 50, 50
+    canvas:
+        Color:
+            rgba: (189/255, 116/255, 43/255, 1) # color code: '#bd742b'
+        Ellipse:
+            pos: self.pos
+            size: self.size
+
+<PongPaddle>:
+    size: 25, 200
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<PongGame>:
+    ball: pong_ball
+    player1: player_left
+    player2: player_right
+
+    Label:
+        canvas.before:
+            Color:
+                rgba: (159/255, 176/255, 204/255, 1) # color code: '#9fb0cc'
+            Rectangle:
+                size: root.size
+
+    Label:
+        background_color: (1, 1, 1, 1)
+        canvas.before:
+            Color:
+                rgba: self.background_color
+            Rectangle:
+                pos: root.center_x - 5, 0
+                size: 10, root.height
+
+    Label:
+        font_size: 70
+        center_x: root.width / 4
+        top: root.top - 50
+        text: str(root.player1.score)
+
+    Label:
+        font_size: 70
+        center_x: root.width * 3 / 4
+        top: root.top - 50
+        text: str(root.player2.score)
+
+    PongBall:
+        id: pong_ball
+        center: self.parent.center
+
+    PongPaddle:
+        id: player_left
+        x: root.x
+        center_y: root.center_y
+        canvas.before:
+            Color:
+                rgba: (44/255, 81/255, 191/255, 1) # Color code : '#2c51bf'
+
+    PongPaddle:
+        id: player_right
+        x: root.width - self.width
+        center_y: root.center_y
+        canvas.before:
+            Color:
+                rgba: (191/255, 59/255, 44/255, 1) # Color code: '#bf3b2c'
